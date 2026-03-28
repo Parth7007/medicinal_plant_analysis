@@ -3,7 +3,7 @@ uvicorn[standard]
 python-multipart
 numpy
 pillow
-tensorflow
+onnxruntime
 pydantic
 python-dotenv
 requests
