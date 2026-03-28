@@ -32,6 +32,12 @@ const Hero = () => {
           >
             <FaSearch className="text-2xl" /> Get Info by Prompt
           </button>
+          <button
+            className="flex items-center gap-3 px-6 py-4 text-lg font-bold bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white rounded-lg shadow-lg transition-transform hover:scale-105"
+            onClick={() => navigate("remedy-chat")}
+          >
+            🌿 Find Remedies
+          </button>
         </div>
       </div>
     </div>

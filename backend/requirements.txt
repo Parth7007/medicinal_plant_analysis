@@ -7,3 +7,4 @@ tensorflow
 pydantic
 python-dotenv
 requests
+google-api-python-client

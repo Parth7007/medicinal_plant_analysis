@@ -6,6 +6,7 @@ const Navbar = () => {
 
   const links = [
     { to: "", label: "Home" },
+    { to: "remedy-chat", label: "Remedy Chat" },
     { to: "contact", label: "Contact" },
     { to: "about", label: "About" },
     { to: "faq", label: "FAQ" },

@@ -18,6 +18,9 @@ class Settings:
     NIM_API_KEY: str = os.getenv("NIM_API_KEY", "")
     NIM_API_URL: str = "https://integrate.api.nvidia.com/v1/chat/completions"
 
+    # YouTube Data API
+    YOUTUBE_API_KEY: str = os.getenv("YOUTUBE_API_KEY", "")
+
     # Model
     PLANT_LABELS: list = [
         'Amaranthus Green', 'Asthma Plant', 'Avaram', 'Balloon vine',

@@ -9,6 +9,7 @@ import About from "./Components/About";
 import FAQ from "./Components/FAQ";
 import SBI from "./Components/SBI";
 import GIB from "./Components/GIB";
+import RemedyChat from "./Components/RemedyChat";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: "faq", element: <FAQ /> },
       { path: "search-by-image", element: <SBI /> },
       { path: "get-info-by-prompt", element: <GIB /> },
+      { path: "remedy-chat", element: <RemedyChat /> },
     ],
   },
 ]);
