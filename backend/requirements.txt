@@ -3,7 +3,6 @@ uvicorn[standard]
 python-multipart
 numpy
 pillow
-tensorflow
 pydantic
 python-dotenv
 requests
