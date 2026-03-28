@@ -4,6 +4,7 @@ export const API_ROUTES = {
   predict: `${API_BASE_URL}/api/predict/`,
   chat: `${API_BASE_URL}/api/chat/`,
   remedy: `${API_BASE_URL}/api/remedy/`,
+  prompt: `${API_BASE_URL}/api/prompt/`,
 };
 
 export default API_BASE_URL;

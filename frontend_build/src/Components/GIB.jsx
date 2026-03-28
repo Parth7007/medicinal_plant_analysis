@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import heroBg from "../Img/medicinal-plant-bg.jpg";
-
-const GEMINI_API_KEY = "AIzaSyDdifJhrztNdBYGKGWM1xDtQr3vP2GSTds";
-const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+import { API_ROUTES } from "../config/api";
 
 const suggestions = [
   "Herbs for healing",
@@ -59,16 +57,19 @@ const GIB = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${GEMINI_URL}?key=${GEMINI_API_KEY}`, {
+      const res = await fetch(API_ROUTES.prompt, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contents: [{ parts: [{ text: userMessage.text }] }] }),
+        body: JSON.stringify({ prompt: userMessage.text }),
       });
       const data = await res.json();
-      const generatedText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
+      if (!res.ok) {
+        throw new Error(data.detail || "Failed to get response");
+      }
+      const generatedText = data.answer || "No response received.";
       setChatHistory((prev) => [...prev, { role: "model", text: generatedText }]);
     } catch (error) {
-      setChatHistory((prev) => [...prev, { role: "model", text: "Error fetching response. Please try again." }]);
+      setChatHistory((prev) => [...prev, { role: "model", text: error.message || "Error fetching response. Please try again." }]);
     } finally {
       setLoading(false);
     }

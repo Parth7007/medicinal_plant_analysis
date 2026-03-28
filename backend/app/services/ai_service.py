@@ -2,7 +2,7 @@ import requests
 from app.core.config import settings
 
 
-def _nim_request(prompt: str, model: str = "meta/llama-3.3-70b-instruct") -> str:
+def _nim_request(prompt: str, model: str = "meta/llama-3.3-70b-instruct", max_tokens: int = 500) -> str:
     headers = {
         "Authorization": f"Bearer {settings.NIM_API_KEY}",
         "Content-Type": "application/json",
@@ -11,7 +11,7 @@ def _nim_request(prompt: str, model: str = "meta/llama-3.3-70b-instruct") -> str
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
         "temperature": 0.7,
-        "max_tokens": 500,
+        "max_tokens": max_tokens,
     }
     try:
         response = requests.post(settings.NIM_API_URL, headers=headers, json=payload, timeout=1000)
