@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://127.https://medicinal-plant-analysis.onrender.com.0.1:8000";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "https://medicinal-plant-analysis.onrender.com";
 
 export const API_ROUTES = {
   predict: `${API_BASE_URL}/api/predict/`,
