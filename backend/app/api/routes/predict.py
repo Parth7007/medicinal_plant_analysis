@@ -3,7 +3,7 @@ import shutil
 import time
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from app.core.config import settings
-from app.services.cnn_service import cnn_model_service
+from app.services.vision_service import predict_plant_with_vision
 from app.services.ai_service import generate_plant_info
 from app.models.schemas import PredictResponse
 
@@ -23,7 +23,8 @@ async def predict(file: UploadFile = File(...)):
 
         await file.close()
 
-        label, score = cnn_model_service.predict(file_path)
+        # Use NVIDIA NIM vision model instead of CNN
+        label, score = predict_plant_with_vision(file_path)
         _state["last_predicted_plant"] = label
 
         plant_info = generate_plant_info(label)

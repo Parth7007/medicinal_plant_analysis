@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from app.services.ai_service import _nim_request
+from app.services.ai_service import _ollama_request
 
 router = APIRouter()
 
@@ -26,7 +26,7 @@ async def prompt_query(request: PromptRequest):
             "Be informative and concise. Use bullet points where appropriate."
         )
         full_prompt = f"{system_context}\n\nUser question: {request.prompt}"
-        answer = _nim_request(full_prompt, max_tokens=800)
+        answer = _ollama_request(full_prompt, max_tokens=800)
         if not answer:
             raise HTTPException(status_code=500, detail="No response from AI service.")
         return PromptResponse(answer=answer)

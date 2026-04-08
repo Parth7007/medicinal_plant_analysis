@@ -14,7 +14,10 @@ class Settings:
     # Upload dir
     UPLOAD_DIR: str = "temp_uploads"
 
-    # NVIDIA NIM API
+    # Ollama (local LLM)
+    OLLAMA_API_URL: str = os.getenv("OLLAMA_API_URL", "http://localhost:11434/api/chat")
+
+    # NVIDIA NIM API (used for vision model only)
     NIM_API_KEY: str = os.getenv("NIM_API_KEY", "")
     NIM_API_URL: str = "https://integrate.api.nvidia.com/v1/chat/completions"
 

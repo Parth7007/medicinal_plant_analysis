@@ -6,31 +6,30 @@ from app.core.config import settings
 from app.models.remedy_schemas import PlantRecommendation, YouTubeVideo
 
 
-def _nim_request(prompt: str, model: str = "meta/llama-3.3-70b-instruct", max_tokens: int = 2000) -> str:
-    """Make a request to NVIDIA NIM API using Llama 70B."""
-    headers = {
-        "Authorization": f"Bearer {settings.NIM_API_KEY}",
-        "Content-Type": "application/json",
-    }
+def _ollama_request(prompt: str, model: str = "gemma3:1b", max_tokens: int = 2000) -> str:
+    """Make a request to local Ollama API using gemma3:1b."""
     payload = {
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.7,
-        "max_tokens": max_tokens,
+        "stream": False,
+        "options": {
+            "num_predict": max_tokens,
+            "temperature": 0.7,
+        },
     }
     try:
-        response = requests.post(settings.NIM_API_URL, headers=headers, json=payload, timeout=120)
+        response = requests.post(settings.OLLAMA_API_URL, json=payload, timeout=120)
         if response.status_code != 200:
-            print(f"[NIM ERROR] {response.status_code}: {response.text}")
+            print(f"[OLLAMA ERROR] {response.status_code}: {response.text}")
             return ""
-        return response.json()["choices"][0]["message"]["content"]
+        return response.json()["message"]["content"]
     except Exception as e:
-        print(f"[NIM ERROR] Request failed: {str(e)}")
+        print(f"[OLLAMA ERROR] Request failed: {str(e)}")
         return ""
 
 
 def get_plant_recommendations(query: str) -> List[dict]:
-    """Use NIM Llama 70B to get plant recommendations for a health issue."""
+    """Use Ollama gemma3:1b to get plant recommendations for a health issue."""
     prompt = f"""You are an expert in Ayurvedic and herbal medicine. A user has the following health issue: "{query}"
 
 Recommend exactly 4 medicinal plants that can help with this condition. For each plant, provide the information in the following JSON format. Return ONLY the JSON array, no other text before or after it.
@@ -47,7 +46,7 @@ Recommend exactly 4 medicinal plants that can help with this condition. For each
 
 Important: Return ONLY valid JSON. No markdown, no code blocks, no explanation text."""
 
-    response = _nim_request(prompt, max_tokens=2500)
+    response = _ollama_request(prompt, max_tokens=2500)
     if not response:
         return []
 
