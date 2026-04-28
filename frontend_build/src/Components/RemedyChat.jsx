@@ -267,7 +267,7 @@ const RemedyChat = () => {
 
   return (
     <div
-      className="relative min-h-screen flex flex-col items-center pt-20 pb-12 px-4 bg-cover bg-center bg-fixed text-white"
+      className="relative min-h-screen flex flex-col items-center pt-20 pb-12 px-4 bg-cover bg-center bg-fixed text-white overflow-x-hidden"
       style={{ backgroundImage: `url(${heroBg})` }}
     >
       {/* Overlay */}
@@ -295,22 +295,22 @@ const RemedyChat = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="max-w-2xl mx-auto mb-6"
+          className="w-full max-w-2xl mx-auto mb-6"
         >
-          <div className="flex gap-3 bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 p-2 shadow-2xl focus-within:border-green-400/50 transition-colors">
+          <div className="flex flex-col sm:flex-row gap-3 bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 p-2 shadow-2xl focus-within:border-green-400/50 transition-colors">
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Describe your health issue... (e.g. headache, diabetes, skin rash)"
-              className="flex-1 h-14 px-5 text-base bg-transparent text-white placeholder-gray-400 outline-none"
+              placeholder="Describe your health issue... (e.g. headache, diabetes)"
+              className="flex-1 w-full h-14 px-4 text-base bg-transparent text-white placeholder-gray-400 outline-none"
               id="remedy-search-input"
             />
             <button
               onClick={() => handleSearch()}
               disabled={loading || !query.trim()}
-              className="px-8 h-14 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold rounded-xl text-base transition-all duration-200 hover:shadow-lg hover:shadow-green-500/25 disabled:shadow-none flex items-center gap-2"
+              className="w-full sm:w-auto px-8 h-14 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold rounded-xl text-base transition-all duration-200 hover:shadow-lg hover:shadow-green-500/25 disabled:shadow-none flex justify-center items-center gap-2"
               id="remedy-search-button"
             >
               {loading ? (
